@@ -17,23 +17,19 @@ public class MainApp {
 
       UserService userService = context.getBean(UserService.class);
 
-      saveUserWithCars(userService, new User("User1", "Lastname1", "user1@mail.ru"), new Car("1model", 1));
-      saveUserWithCars(userService, new User("User2", "Lastname2", "user2@mail.ru"), new Car("2model", 2));
-      saveUserWithCars(userService, new User("User3", "Lastname3", "user3@mail.ru"), new Car("3model", 3));
-      saveUserWithCars(userService, new User("User4", "Lastname4", "user4@mail.ru"), new Car("4model", 4));
-
-//      userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-//      userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-//      userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-//      userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
+      userService.add(new User("User1", "Lastname1", "user1@mail.ru", new Car("1model", 1)));
+      userService.add(new User("User2", "Lastname2", "user2@mail.ru", new Car("2model", 2)));
+      userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car("3model", 3)));
+      userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car("4model", 4)));
 
       List<User> users = userService.listUsers();
       for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = "+user.getLastName());
-         System.out.println("Email = "+user.getEmail());
-         System.out.println();
+         System.out.println(user);
+//         System.out.println("Id = "+user.getId());
+//         System.out.println("First Name = "+user.getFirstName());
+//         System.out.println("Last Name = "+user.getLastName());
+//         System.out.println("Email = "+user.getEmail());
+//         System.out.println();
       }
 
       try {
@@ -44,11 +40,5 @@ public class MainApp {
       }
 
       context.close();
-   }
-
-   static void saveUserWithCars(UserService userService, User user, Car car){
-      user.setCar(car);
-      car.setUser(user);
-      userService.add(user);
    }
 }
