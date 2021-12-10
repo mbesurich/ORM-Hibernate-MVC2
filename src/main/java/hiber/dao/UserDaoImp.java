@@ -5,12 +5,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -24,15 +20,9 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   @SuppressWarnings("unchecked")
    public List<User> listUsers() {
       TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User", User.class);
-      List<?> results = (List<?>) query.getResultList();
-      List<User> users = new ArrayList<>();
-      return results.stream().map(e -> (User)e).collect(Collectors.toList());
-//      Query query = sessionFactory.getCurrentSession().createQuery("from User u", User.class);
-//      return Collections.checkedList(query.getResultList(), User.class);
-
+      return query.getResultList();
    }
 
    public User getUserByCar(String model, int series){
